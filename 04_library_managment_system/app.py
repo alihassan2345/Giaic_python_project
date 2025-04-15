@@ -21,8 +21,9 @@ def remove_book():
         if book['title'].lower() == title.lower():
             library.remove(book)
             print(f"Book '{title}' removed successfully.")
-            return
-    print(f"Book '{title}' not found in the library.")
+        else:
+            print(f"Book '{title}' not found in the library.")
+            break
 
 # Example usage
 while True:

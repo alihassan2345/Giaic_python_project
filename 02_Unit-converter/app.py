@@ -5,7 +5,7 @@ st.title("🌍Unit Converter App")
 st.write("### 🔄:rainbow[Converts Length, Weight, Time, Tempreature Instantly]")
 st.write(" Welcome! Select a category, enter a value and get the converted result in real-time")
 
-category = st.selectbox("Choose a categoty", ["Length", "Weight", "Time" , "Temperature" ])
+category1 = st.selectbox("Choose a categoty", ["Length", "Weight", "Time" , "Temperature" ])
 
 def convert_units(category, value, unit):
     if category == "Length":
@@ -64,27 +64,27 @@ def convert_units(category, value, unit):
 
     return "Invalid unit"
         
-if category == "Length":
+if category1 == "Length":
     unit = st.selectbox("📏 Select Conversion", [
         "Miles to Kilometers", "Kilometers to Miles",
         "Meters to Feet", "Feet to Meters",
         "Centimeters to Inches", "Inches to Centimeters"
     ])
     
-elif category == "Weight":
+elif category1 == "Weight":
     unit = st.selectbox("⚖️ Select Conversion", [
         "Kilograms to Pounds", "Pounds to Kilograms",
         "Grams to Ounces", "Ounces to Grams"
     ])
     
-elif category == "Time":
+elif category1 == "Time":
     unit = st.selectbox("⏱️ Select Conversion", [
         "Seconds to Minutes", "Minutes to Seconds",
         "Minutes to Hours", "Hours to Minutes",
         "Hours to Days", "Days to Hours",
         "Weeks to Days", "Days to Weeks"
     ])
-elif category == "Temperature":
+elif category1 == "Temperature":
     unit = st.selectbox("🌡️ Select Conversion", [
         "Celsius to Fahrenheit", "Fahrenheit to Celsius",
         "Celsius to Kelvin", "Kelvin to Celsius"
@@ -96,6 +96,6 @@ value = st.number_input("Enter the value to convert")
 
 
 if st.button("Convert"):
-    result = convert_units(category, value, unit)
+    result = convert_units(category1, value, unit)
     st.success(f"The result is {result : .2f}")
     

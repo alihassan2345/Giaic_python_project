@@ -1,38 +1,29 @@
 import streamlit as st
-import pandas as pd
-from io import BytesIO
 
-st.set_page_config(page_title="📁 File Converter & Cleaner", layout="wide")
-st.title("📁 File Converter & Cleaner")
-st.write("Upload your CSV and Excel Files to clean the data convert formats effortlessly🚀")
+# Title
+st.title("🧮 Simple Calculator using Streamlit")
 
-files = st.file_uploader("Upload CSV or Excel Files", type=["csv", "xlsx"], accept_multiple_files=True)
+# Input fields
+num1 = st.number_input("Enter first number:")
+num2 = st.number_input("Enter second number:")
 
-if files:
-    for file in files:
-        ext = file.name.split(".")[-1]
-        df = pd.read_csv(file) if ext == "csv" else pd.read_excel(file)
+# Operation selection
+operation = st.selectbox("Select operation", ["Addition", "Subtraction", "Multiplication", "Division"])
 
-        st.subheader(f"🔍 {file.name} - Preview")
-       
-
-       
-
-        if st.checkbox(f"📊 Show Chart - {file.name}"):
-            st.bar_chart(df.select_dtypes(include="number" ).iloc[:, :3] )
-
-        format_choice = st.radio(f"Convert {file.name} to:", ["CSV", "Excel"],key=f"radio_{file.name}")
-
-        if st.button(f"⬇️ Download {file.name} as {format_choice}"):
-            output = BytesIO()
-            if format_choice == "CSV":
-                df.to_csv(output, index=False)
-                mime = "text/csv"
-                new_name = file.name.replace(ext, "csv")
-            else:
-                df.to_excel(output, index=False)
-                mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                new_name = file.name.replace(ext, "xlsx")
-            output.seek(0)
-            st.download_button("⬇️ Download File", file_name=new_name, data=output, mime=mime)
-        st.success("Processing Completed! 🎉")
+# Result
+if st.button("Calculate"):
+    if operation == "Addition":
+        result = num1 + num2
+        st.success(f"Result: {result}")
+    elif operation == "Subtraction":
+        result = num1 - num2
+        st.success(f"Result: {result}")
+    elif operation == "Multiplication":
+        result = num1 * num2
+        st.success(f"Result: {result}")
+    elif operation == "Division":
+        if num2 != 0:
+            result = num1 / num2
+            st.success(f"Result: {result}")
+        else:
+            st.error("Cannot divide by zero!")
